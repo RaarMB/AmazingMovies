@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="standardDimen0dp">0dp</dimen>
+    <dimen name="standardDimendot5dp">0.5dp</dimen>
+    <dimen name="standardDimen1dp">1dp</dimen>
+    <dimen name="standardDimen2dp">2dp</dimen>
+    <dimen name="standardDimen8dp">8dp</dimen>
+    <dimen name="standardDimen10dp">10dp</dimen>
+    <dimen name="standardDimen15dp">15dp</dimen>
+    <dimen name="standardDimen16dp">16dp</dimen>
+    <dimen name="standardDimen20dp">20dp</dimen>
+    <dimen name="standardDimen25dp">25dp</dimen>
+    <dimen name="standardDimen23dp">23dp</dimen>
+    <dimen name="standardDimen30dp">30dp</dimen>
+    <dimen name="standardDimen40dp">40dp</dimen>
+    <dimen name="standardDimen50dp">50dp</dimen>
+    <dimen name="standardDimen56dp">56dp</dimen>
+    <dimen name="standardDimen80dp">80dp</dimen>
+    <dimen name="standardDimen120dp">120dp</dimen>
+    <dimen name="standardDimen200dp">200dp</dimen>
+
+    <dimen name="textSize80sp">80sp</dimen>
+    <dimen name="textSize40sp">40sp</dimen>
+    <dimen name="textSize35sp">35sp</dimen>
+    <dimen name="textSize32sp">32sp</dimen>
+    <dimen name="textSize25sp">25sp</dimen>
+    <dimen name="textSize22sp">22sp</dimen>
+    <dimen name="textSize20sp">20sp</dimen>
+    <dimen name="textSize18sp">18sp</dimen>
+    <dimen name="textSize14sp">14sp</dimen>
+    <dimen name="textSize16sp">16sp</dimen>
+    <dimen name="textSize12sp">12sp</dimen>
+    <dimen name="app_bar_height">136dp</dimen>
+
+    <dimen name="important_text_size">20sp</dimen>
+    <dimen name="important_text_size22">22sp</dimen>
+
+    <dimen name="recycler_section_header_height">20dp</dimen>
+
+</resources>

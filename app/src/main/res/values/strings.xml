@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Amazing Movies</string>
+
+    <string name="accept">Aceptar</string>
+    <string name="amazing">Amazing</string>
+    <string name="movies">Movies</string>
+
+    <!-- Dashboard -->
+    <string name="home">Inicio</string>
+    <string name="popular">Populares</string>
+    <string name="top_rated">Lo mejor</string>
+    <string name="upcoming">Próximamente</string>
+    <string name="search">Buscar</string>
+
+    <!-- Home Fragment-->
+    <string name="wellcome">Bienvenido</string>
+    <string name="category">Categorías</string>
+    <string name="service_fail">Error al obtener la información</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Youtube -->
+    <string name="player_error">Error initializing YouTube player: %s</string>
+    <string name="seek_to">Jump To</string>
+    <string name="seek_to_hint">Seconds</string>
+
+</resources>
