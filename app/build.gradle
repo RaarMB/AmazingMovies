@@ -28,6 +28,7 @@ android {
         debug {
             buildConfigField("String", "SERVER_URL", "\"https://api.themoviedb.org/4/discover/\"")
             buildConfigField("String", "SERVER_URL_IMAGES", "\"https://image.tmdb.org/t/p/w500\"")
+            buildConfigField("String", "SERVER_GENRE", "\"https://api.themoviedb.org/3/genre/movie/\"")
         }
 
         release {
@@ -35,6 +36,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "SERVER_URL", "\"https://api.themoviedb.org/4/discover/\"")
             buildConfigField("String", "SERVER_URL_IMAGES", "\"https://image.tmdb.org/t/p/w500\"")
+            buildConfigField("String", "SERVER_GENRE", "\"https://api.themoviedb.org/3/genre/movie/\"")
         }
     }
 

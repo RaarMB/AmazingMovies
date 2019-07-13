@@ -24,6 +24,10 @@ interface Api {
     @GET(NameServices.MOVIE)
     fun getUpcomingMovies(@Query("primary_release_year") year: String): Observable<GetMoviesResponse>
 
+    @Headers("Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNTA1ZGI4ZTUwZWYwZDVmNDUyNTZjMWRmNzY2YjhiMiIsInN1YiI6IjVkMWZlMTNmMTVjNjM2NjliZGY0ZDBkNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lGq81Zt85fBwAvR3au1zM1oi9pW3AOvLH2eIjBC3cJ8")
+    @GET(NameServices.MOVIE)
+    fun getCategoryMovies(@Query("with_genres") genre: Int): Observable<GetMoviesResponse>
+
     companion object {
         fun create(): Api {
             val interceptor = HttpLoggingInterceptor()

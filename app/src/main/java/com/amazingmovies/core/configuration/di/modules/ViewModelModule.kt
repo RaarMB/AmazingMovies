@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.amazingmovies.core.configuration.architecture.ViewModelFactory
 import com.amazingmovies.core.configuration.architecture.ViewModelKey
 import com.amazingmovies.home.HomeViewModel
+import com.amazingmovies.search.SearchViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -18,6 +19,11 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
-    internal abstract fun splashViewModel(viewModel: HomeViewModel): ViewModel
+    internal abstract fun homeViewModel(viewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchViewModel::class)
+    internal abstract fun searchViewModel(viewModel: SearchViewModel): ViewModel
 
 }

@@ -23,4 +23,9 @@
     <string name="original_language">Idioma: %1$s</string>
     <string name="overview">%1$s</string>
 
+    <!-- Search Fragment -->
+    <string name="search_genre">Busca un género de peliculas</string>
+    <string name="search_fragment">Buscar</string>
+    <string name="not_found">No existen peliculas con ese genero</string>
+
 </resources>

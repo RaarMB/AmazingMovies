@@ -9,7 +9,7 @@
             android:title="@string/home"/>
 
     <item
-            android:id="@+id/popular"
+            android:id="@+id/search"
             app:showAsAction="ifRoom"
             android:icon="@drawable/ic_search"
             android:title="@string/search"/>
