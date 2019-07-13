@@ -17,12 +17,10 @@
     <string name="category">Categorías</string>
     <string name="service_fail">Error al obtener la información</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <!-- Youtube -->
-    <string name="player_error">Error initializing YouTube player: %s</string>
-    <string name="seek_to">Jump To</string>
-    <string name="seek_to_hint">Seconds</string>
+    <!-- Movie Detail Fragment -->
+    <string name="popularity">%1$s</string>
+    <string name="date">Fecha: %1$s</string>
+    <string name="original_language">Idioma: %1$s</string>
+    <string name="overview">%1$s</string>
 
 </resources>

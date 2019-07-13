@@ -49,8 +49,6 @@ class HomeFragment : Fragment(), Initializer {
         super.onAttach(context)
         if (context is ActivityInteraction)
             activityInteraction = context
-
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

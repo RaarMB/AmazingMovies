@@ -27,7 +27,11 @@ class UpcomingMovieAdapter(var context: Context) :
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val imageView = holder.binding.imageMovie
-        ImageUrl(imageView).execute("${BuildConfig.SERVER_URL_IMAGES}${movieList[position].poster_path}")
+        if(movieList[position].poster_path.isNullOrEmpty() || movieList[position].poster_path!!.contains("null")){
+            imageView.setImageDrawable(context.getDrawable(R.drawable.ic_upcoming))
+        }else{
+            ImageUrl(imageView).execute("${BuildConfig.SERVER_URL_IMAGES}${movieList[position].poster_path}")
+        }
         holder.binding.movie = movieList[position]
         holder.binding.root.setOnClickListener {
             listener.onClickUpcomingMovie(it, movieList[position])
