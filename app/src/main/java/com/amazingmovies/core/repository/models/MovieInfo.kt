@@ -43,8 +43,24 @@ open class MovieInfo(
         false,
         "",
         ""
-    ) {
-    }
+    )
+    constructor(test: Boolean): this(
+        515.884f,
+        429617,
+        false,
+        1365,
+        7.8f,
+        "Spider-Man: Lejos de Casa",
+        "2019-07-05",
+        "en",
+        "Spider-Man: Far from Home",
+        RealmList(28),
+        "/8RKBHHRqOMOLh5qW3sS6TSFTd8h.jpg",
+        false,
+        "Ido, un compasivo médico de cíborgs, encuentra a Alita abandonada en el desguace de Iron City. Cuando Alita despierta, no sabe quién es, ni reconoce el mundo en el que se encuentra, todo es nuevo para ella. Ido intentará proteger a Alita de su misterioso pasado, mientras que su nuevo amigo Hugo le ayudará a despertar sus recuerdos. En ese momento, Alita descubre que posee habilidades de combate extraordinarias, que podría usar para salvar a su nueva familia y amigos. Decidida a encontrar la verdad tras sus orígenes, Alita comienza un viaje que le enfrentará a las injusticias de un mundo oscuro y corrupto, descubriendo que sólo ella puede cambiarlo.",
+        "/quWP5VIzTUf0Hr8AJZLloM6js8I.jpg"
+    )
+
 
     constructor(source: Parcel) : this(
         source.readValue(Float::class.java.classLoader) as Float?,

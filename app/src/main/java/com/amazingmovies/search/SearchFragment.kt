@@ -2,22 +2,16 @@ package com.amazingmovies.search
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.ActionMenuView
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
 import com.amazingmovies.R
-import com.amazingmovies.core.configuration.constants.NameGenres
-import com.amazingmovies.core.extensions.addOnTextChangedListeners
-import com.amazingmovies.core.extensions.value
 import com.amazingmovies.core.repository.models.MovieInfo
 import com.amazingmovies.core.view.ActivityInteraction
 import com.amazingmovies.core.view.Initializer
@@ -25,8 +19,6 @@ import com.amazingmovies.search.adapter.SearchAdapter
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
-import androidx.core.view.MenuItemCompat
-import androidx.core.view.MenuItemCompat.getActionView
 import androidx.navigation.fragment.findNavController
 import com.amazingmovies.core.extensions.hasConection
 import com.amazingmovies.core.extensions.rxSearch
@@ -119,8 +111,6 @@ class SearchFragment : Fragment(), Initializer {
         searchViewModel.getFindMovies().observe(this, Observer { findMovies ->
             if (findMovies?.results != null){
                 viewSearch.addFindMovies(findMovies.results as MutableList<MovieInfo>)
-            }else{
-                showDialogErrorMessage(getString(R.string.service_fail))
             }
         })
 

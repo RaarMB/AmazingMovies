@@ -1,12 +1,8 @@
 package com.amazingmovies.search
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.amazingmovies.core.configuration.constants.NameGenres
 import com.amazingmovies.core.repository.Api
 import com.amazingmovies.core.repository.ApiGenre
-import com.amazingmovies.core.repository.models.Genre
-import com.amazingmovies.core.repository.models.GenreResponse
 import com.amazingmovies.core.repository.models.GetMoviesResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

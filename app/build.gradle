@@ -94,6 +94,7 @@ dependencies {
     testImplementation "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
+    testImplementation 'android.arch.core:core-testing:1.1.1'
     androidTestImplementation 'org.mockito:mockito-android:2.27.0'
 
     // Core library

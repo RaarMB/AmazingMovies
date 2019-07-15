@@ -15,6 +15,7 @@ open class GetMoviesResponse(
     var results: List<MovieInfo>?
 ) : Parcelable {
     constructor() : this(null, -1, -1, null)
+    constructor(test: Boolean): this(1,1,1, listOf(MovieInfo(true)))
 
     constructor(source: Parcel) : this(
         source.readValue(Int::class.java.classLoader) as Int?,
@@ -39,4 +40,5 @@ open class GetMoviesResponse(
             override fun newArray(size: Int): Array<GetMoviesResponse?> = arrayOfNulls(size)
         }
     }
+
 }
