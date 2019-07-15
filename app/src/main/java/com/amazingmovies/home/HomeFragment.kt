@@ -97,14 +97,14 @@ class HomeFragment : Fragment(), Initializer {
         viewAdapterTop.setOnItemClickListener(object : TopMovieAdapter.OnItemClickListener {
             override fun onClickTopMovie(view: View, movieInfo: MovieInfo) {
                 Log.i("onClickTopMovie", movieInfo.toString())
-
+                goToDetail(movieInfo)
             }
         })
 
         viewAdapterUpcoming.setOnItemClickListener(object : UpcomingMovieAdapter.OnItemClickListener {
             override fun onClickUpcomingMovie(view: View, movieInfo: MovieInfo) {
                 Log.i("onClickUpcomingMovie", movieInfo.toString())
-
+                goToDetail(movieInfo)
             }
         })
 

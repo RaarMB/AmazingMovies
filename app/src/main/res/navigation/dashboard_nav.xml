@@ -23,5 +23,8 @@
     </fragment>
     <fragment android:id="@+id/search"
               android:name="com.amazingmovies.search.SearchFragment"
-              android:label="SearchFragment"/>
+              android:label="SearchFragment">
+        <action android:id="@+id/action_search_to_movieDetailFragment" app:destination="@id/movieDetailFragment"
+                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
 </navigation>

@@ -27,8 +27,10 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.MenuItemCompat.getActionView
+import androidx.navigation.fragment.findNavController
 import com.amazingmovies.core.extensions.hasConection
 import com.amazingmovies.core.extensions.rxSearch
+import com.amazingmovies.core.view.Argument
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -84,8 +86,6 @@ class SearchFragment : Fragment(), Initializer {
                 }else{
                     if(context!!.hasConection){
                         searchViewModel.findMovies(it)
-                    }else{
-
                     }
                 }
             }
@@ -102,14 +102,13 @@ class SearchFragment : Fragment(), Initializer {
             adapter = viewSearch
         }
 
-
     }
 
     override fun actions() {
 
         viewSearch.setOnItemClickListener(object : SearchAdapter.OnItemClickListener {
             override fun onClickFindMovie(view: View, movieInfo: MovieInfo) {
-                Log.i("onClickPopularMovie", movieInfo.toString())
+                goToDetail(movieInfo)
             }
         })
 
@@ -161,11 +160,10 @@ class SearchFragment : Fragment(), Initializer {
         }
     }
 
-    private fun goneRecyclerViewSearch(gone: Boolean) {
-        recyclerViewSearch.visibility = if (gone){
-            View.GONE
-        }else {
-            View.VISIBLE
-        }
+    private fun goToDetail(detail: MovieInfo) {
+        val args = Bundle()
+        args.putParcelable(Argument.MOVIE_DETAIL, detail)
+        findNavController().navigate(R.id.action_search_to_movieDetailFragment, args)
+
     }
 }
