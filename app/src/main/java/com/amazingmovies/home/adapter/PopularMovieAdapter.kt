@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.amazingmovies.BuildConfig
 import com.amazingmovies.R
+import com.amazingmovies.core.extensions.hasConection
 import com.amazingmovies.core.repository.models.MovieInfo
 import com.amazingmovies.core.utils.ImageUrl
 import com.amazingmovies.databinding.CardMovieBinding
@@ -31,9 +32,12 @@ class PopularMovieAdapter(var context: Context) :
         if(movieList[position].poster_path.isNullOrEmpty() || movieList[position].poster_path!!.contains("null")){
             imageView.setImageDrawable(context.getDrawable(R.drawable.ic_upcoming))
         }else{
-            ImageUrl(imageView).execute("${BuildConfig.SERVER_URL_IMAGES}${movieList[position].poster_path}")
+            if(context.hasConection){
+                ImageUrl(imageView).execute("${BuildConfig.SERVER_URL_IMAGES}${movieList[position].poster_path}")
+            }else{
+                imageView.setImageDrawable(context.getDrawable(R.drawable.ic_upcoming))
+            }
         }
-        Log.d("onbindviewholder", "Element $position set.")
         holder.binding.movie = movieList[position]
         holder.binding.root.setOnClickListener {
             listener.onClickPopularMovie(it, movieList[position])

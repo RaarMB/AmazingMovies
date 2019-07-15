@@ -1,6 +1,7 @@
 package com.amazingmovies.core.repository
 
 import com.amazingmovies.BuildConfig
+import com.amazingmovies.core.configuration.constants.Language
 import com.amazingmovies.core.configuration.constants.NameServices
 import com.amazingmovies.core.repository.models.GenreResponse
 import io.reactivex.Observable
@@ -15,7 +16,9 @@ import retrofit2.http.Query
 interface ApiGenre {
 
     @GET(NameServices.LIST)
-    fun getGenre(@Query("api_key") apiKey: String): Observable<GenreResponse>
+    fun getGenre(
+        @Query("api_key") apiKey: String,
+        @Query("language") lang: String = Language.ES): Observable<GenreResponse>
 
     companion object {
         fun create(): ApiGenre {

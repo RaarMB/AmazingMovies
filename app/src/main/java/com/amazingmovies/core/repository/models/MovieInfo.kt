@@ -2,59 +2,84 @@ package com.amazingmovies.core.repository.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.amazingmovies.core.extensions.createRealmIntList
+import com.amazingmovies.core.extensions.readRealmList
+import com.amazingmovies.core.extensions.writeRealmIntList
+import com.amazingmovies.core.extensions.writeRealmList
+import io.realm.RealmList
+import io.realm.RealmObject
+import io.realm.annotations.RealmClass
 import java.util.ArrayList
 
-data class MovieInfo(
-    val popularity: Float?,
-    val id: Int?,
-    val video: Boolean?,
-    val vote_count: Int?,
-    val vote_average: Float?,
-    val title: String?,
-    val release_date: String?,
-    val original_language: String?,
-    val original_title: String?,
-    val genre_ids: IntArray?,
-    val backdrop_path: String?,
-    val adult: Boolean?,
-    val overview: String?,
-    val poster_path: String?
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readValue(Float::class.java.classLoader) as? Float,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Float::class.java.classLoader) as? Float,
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.createIntArray(),
-        parcel.readString(),
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-        parcel.readString(),
-        parcel.readString()
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeValue(popularity)
-        parcel.writeValue(id)
-        parcel.writeValue(video)
-        parcel.writeValue(vote_count)
-        parcel.writeValue(vote_average)
-        parcel.writeString(title)
-        parcel.writeString(release_date)
-        parcel.writeString(original_language)
-        parcel.writeString(original_title)
-        parcel.writeString(backdrop_path)
-        parcel.writeValue(adult)
-        parcel.writeString(overview)
-        parcel.writeString(poster_path)
+@RealmClass
+open class MovieInfo(
+    var popularity: Float?,
+    var id: Int?,
+    var video: Boolean?,
+    var vote_count: Int?,
+    var vote_average: Float?,
+    var title: String?,
+    var release_date: String?,
+    var original_language: String?,
+    var original_title: String?,
+    var genre_ids: RealmList<Int>?,
+    var backdrop_path: String?,
+    var adult: Boolean?,
+    var overview: String?,
+    var poster_path: String?
+) : RealmObject(), Parcelable {
+    constructor() : this(
+        -1.0f,
+        -1,
+        false,
+        -1,
+        -1.0f,
+        "",
+        "",
+        "",
+        "",
+        RealmList<Int>(),
+        "",
+        false,
+        "",
+        ""
+    ) {
     }
 
-    override fun describeContents(): Int {
-        return 0
+    constructor(source: Parcel) : this(
+        source.readValue(Float::class.java.classLoader) as Float?,
+        source.readValue(Int::class.java.classLoader) as Int?,
+        source.readValue(Boolean::class.java.classLoader) as Boolean?,
+        source.readValue(Int::class.java.classLoader) as Int?,
+        source.readValue(Float::class.java.classLoader) as Float?,
+        source.readString(),
+        source.readString(),
+        source.readString(),
+        source.readString(),
+        source.createRealmIntList(),
+        source.readString(),
+        source.readValue(Boolean::class.java.classLoader) as Boolean?,
+        source.readString(),
+        source.readString()
+    )
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+        writeValue(popularity)
+        writeValue(id)
+        writeValue(video)
+        writeValue(vote_count)
+        writeValue(vote_average)
+        writeString(title)
+        writeString(release_date)
+        writeString(original_language)
+        writeString(original_title)
+        writeRealmIntList(genre_ids!!)
+        writeString(backdrop_path)
+        writeValue(adult)
+        writeString(overview)
+        writeString(poster_path)
     }
 
     override fun equals(other: Any?): Boolean {
@@ -72,10 +97,7 @@ data class MovieInfo(
         if (release_date != other.release_date) return false
         if (original_language != other.original_language) return false
         if (original_title != other.original_title) return false
-        if (genre_ids != null) {
-            if (other.genre_ids == null) return false
-            if (!genre_ids.contentEquals(other.genre_ids)) return false
-        } else if (other.genre_ids != null) return false
+        if (genre_ids != other.genre_ids) return false
         if (backdrop_path != other.backdrop_path) return false
         if (adult != other.adult) return false
         if (overview != other.overview) return false
@@ -94,7 +116,7 @@ data class MovieInfo(
         result = 31 * result + (release_date?.hashCode() ?: 0)
         result = 31 * result + (original_language?.hashCode() ?: 0)
         result = 31 * result + (original_title?.hashCode() ?: 0)
-        result = 31 * result + (genre_ids?.contentHashCode() ?: 0)
+        result = 31 * result + (genre_ids?.hashCode() ?: 0)
         result = 31 * result + (backdrop_path?.hashCode() ?: 0)
         result = 31 * result + (adult?.hashCode() ?: 0)
         result = 31 * result + (overview?.hashCode() ?: 0)
@@ -102,13 +124,16 @@ data class MovieInfo(
         return result
     }
 
-    companion object CREATOR : Parcelable.Creator<MovieInfo> {
-        override fun createFromParcel(parcel: Parcel): MovieInfo {
-            return MovieInfo(parcel)
-        }
+    override fun toString(): String {
+        return "MovieInfo(popularity=$popularity, id=$id, video=$video, vote_count=$vote_count, vote_average=$vote_average, title=$title, release_date=$release_date, original_language=$original_language, original_title=$original_title, genre_ids=$genre_ids, backdrop_path=$backdrop_path, adult=$adult, overview=$overview, poster_path=$poster_path)"
+    }
 
-        override fun newArray(size: Int): Array<MovieInfo?> {
-            return arrayOfNulls(size)
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<MovieInfo> = object : Parcelable.Creator<MovieInfo> {
+            override fun createFromParcel(source: Parcel): MovieInfo = MovieInfo(source)
+            override fun newArray(size: Int): Array<MovieInfo?> = arrayOfNulls(size)
         }
     }
+
 }

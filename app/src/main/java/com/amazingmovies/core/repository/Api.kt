@@ -1,6 +1,7 @@
 package com.amazingmovies.core.repository
 
 import com.amazingmovies.BuildConfig
+import com.amazingmovies.core.configuration.constants.Language
 import com.amazingmovies.core.configuration.constants.NameServices
 import com.amazingmovies.core.repository.models.GetMoviesResponse
 import io.reactivex.Observable
@@ -18,15 +19,21 @@ interface Api {
 
     @Headers("Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNTA1ZGI4ZTUwZWYwZDVmNDUyNTZjMWRmNzY2YjhiMiIsInN1YiI6IjVkMWZlMTNmMTVjNjM2NjliZGY0ZDBkNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lGq81Zt85fBwAvR3au1zM1oi9pW3AOvLH2eIjBC3cJ8")
     @GET(NameServices.MOVIE)
-    fun getMovies(@Query("sort_by") sortBy: String): Observable<GetMoviesResponse>
+    fun getMovies(
+        @Query("sort_by") sortBy: String? = null,
+        @Query("language") lang: String = Language.ES): Observable<GetMoviesResponse>
 
     @Headers("Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNTA1ZGI4ZTUwZWYwZDVmNDUyNTZjMWRmNzY2YjhiMiIsInN1YiI6IjVkMWZlMTNmMTVjNjM2NjliZGY0ZDBkNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lGq81Zt85fBwAvR3au1zM1oi9pW3AOvLH2eIjBC3cJ8")
     @GET(NameServices.MOVIE)
-    fun getUpcomingMovies(@Query("primary_release_year") year: String): Observable<GetMoviesResponse>
+    fun getUpcomingMovies(
+        @Query("primary_release_year") year: String,
+        @Query("language") lang: String = Language.ES): Observable<GetMoviesResponse>
 
     @Headers("Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNTA1ZGI4ZTUwZWYwZDVmNDUyNTZjMWRmNzY2YjhiMiIsInN1YiI6IjVkMWZlMTNmMTVjNjM2NjliZGY0ZDBkNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lGq81Zt85fBwAvR3au1zM1oi9pW3AOvLH2eIjBC3cJ8")
     @GET(NameServices.MOVIE)
-    fun getCategoryMovies(@Query("with_genres") genre: Int): Observable<GetMoviesResponse>
+    fun getCategoryMovies(
+        @Query("with_genres") genre: Int,
+        @Query("language") lang: String = Language.ES): Observable<GetMoviesResponse>
 
     companion object {
         fun create(): Api {

@@ -8,6 +8,9 @@ apply plugin: "androidx.navigation.safeargs"
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'realm-android'
+
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -81,8 +84,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_interceptor_version"
 
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0-alpha05'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0-alpha05'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0-alpha06'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0-alpha06'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.3'
 
@@ -114,4 +117,6 @@ dependencies {
 
     androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation "com.github.vicpinm:krealmextensions:2.5.0"
+
 }

@@ -20,7 +20,7 @@
     <!-- Movie Detail Fragment -->
     <string name="popularity">%1$s</string>
     <string name="date">Fecha: %1$s</string>
-    <string name="original_language">Idioma: %1$s</string>
+    <string name="original_language">Idioma original: %1$s</string>
     <string name="overview">%1$s</string>
 
     <!-- Search Fragment -->

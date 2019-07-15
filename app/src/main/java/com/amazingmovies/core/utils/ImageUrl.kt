@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.graphics.BitmapFactory
 
 
-class ImageUrl constructor(@field:SuppressLint("StaticFieldLeak") var imageView: ImageView): AsyncTask<String, Void, Bitmap>() {
+class ImageUrl constructor(@field:SuppressLint("StaticFieldLeak") var imageView: ImageView): AsyncTask<String, Void, Bitmap?>() {
 
-    override fun doInBackground(vararg params: String?): Bitmap {
+    override fun doInBackground(vararg params: String?): Bitmap? {
 
         val imageURL = params[0]
         var bimage: Bitmap? = null
@@ -19,12 +19,13 @@ class ImageUrl constructor(@field:SuppressLint("StaticFieldLeak") var imageView:
 
         } catch (e: Exception) {
             e.printStackTrace()
+            return null
         }
 
-        return bimage!!
+        return bimage
     }
 
-    override fun onPostExecute(result: Bitmap) {
+    override fun onPostExecute(result: Bitmap?) {
         imageView.setImageBitmap(result)
     }
 }

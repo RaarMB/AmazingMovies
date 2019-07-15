@@ -5,11 +5,11 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.ActionMenuView
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -25,6 +25,14 @@ import com.amazingmovies.search.adapter.SearchAdapter
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
+import androidx.core.view.MenuItemCompat
+import androidx.core.view.MenuItemCompat.getActionView
+import com.amazingmovies.core.extensions.hasConection
+import com.amazingmovies.core.extensions.rxSearch
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
+
 
 class SearchFragment : Fragment(), Initializer {
 
@@ -33,6 +41,7 @@ class SearchFragment : Fragment(), Initializer {
 
     private lateinit var activityInteraction: ActivityInteraction
     private lateinit var viewSearch: SearchAdapter
+    private lateinit var searchView: SearchView
     private lateinit var searchViewModel: SearchViewModel
     private var genre: Int? = null
 
@@ -42,6 +51,7 @@ class SearchFragment : Fragment(), Initializer {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
@@ -56,6 +66,31 @@ class SearchFragment : Fragment(), Initializer {
         super.onActivityCreated(savedInstanceState)
         init()
     }
+
+    @SuppressLint("CheckResult")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search_menu, menu)
+        val searchItem = menu.findItem(R.id.action_search)
+        searchView = searchItem.actionView as SearchView
+        searchView.queryHint = getText(R.string.search_genre)
+        searchView.rxSearch
+            .debounce(300,TimeUnit.MILLISECONDS)
+            .distinctUntilChanged()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.isNullOrEmpty()){
+                    viewSearch.clearMovies()
+                }else{
+                    if(context!!.hasConection){
+                        searchViewModel.findMovies(it)
+                    }else{
+
+                    }
+                }
+            }
+    }
+
 
     override fun references() {
         activityInteraction.setTitle(R.string.search_fragment)
@@ -78,50 +113,15 @@ class SearchFragment : Fragment(), Initializer {
             }
         })
 
-        searchMovie.addOnTextChangedListeners(onTextChanged = { s, _, _, _ ->
-            if(s.isNullOrEmpty()){
-                goneRecyclerViewSearch(true)
-                viewSearch.clearMovies()
-            }else{
-                searchViewModel.genres()
-            }
-        })
-
     }
 
     override fun observables() {
 
-        searchViewModel.getGenresMovies().observe(this, Observer { genresResponse ->
-            if (genresResponse != null){
-                when {
-                    genresResponse.genres != null -> {
-                        genresResponse.genres.forEach {
-                            if(searchMovie.value.contains("accion", true)){
-                                if(it.name == NameGenres.ACTION){
-                                    genre = it.id
-                                    searchViewModel.findMovies(genre!!)
-                                    Log.i("findMovies", "esta buscando")
-                                }
-                            }else{
-                                viewSearch.clearMovies()
-                            }
-
-                        }
-                    }
-                    true -> showDialogErrorMessage(getString(R.string.service_fail))
-                }
-            }
-        })
-
         searchViewModel.getFindMovies().observe(this, Observer { findMovies ->
-            if (findMovies != null){
-                when {
-                    findMovies.results != null -> {
-                        viewSearch.addFindMovies(findMovies.results as MutableList<MovieInfo>)
-                        Log.i("upcomingMovies", findMovies.toString())
-                    }
-                    true -> showDialogErrorMessage(getString(R.string.service_fail))
-                }
+            if (findMovies?.results != null){
+                viewSearch.addFindMovies(findMovies.results as MutableList<MovieInfo>)
+            }else{
+                showDialogErrorMessage(getString(R.string.service_fail))
             }
         })
 

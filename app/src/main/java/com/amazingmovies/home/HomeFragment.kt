@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.amazingmovies.R
+import com.amazingmovies.core.extensions.hasConection
 import com.amazingmovies.core.repository.models.MovieInfo
 import com.amazingmovies.core.view.ActivityInteraction
 import com.amazingmovies.core.view.Argument
@@ -58,10 +59,10 @@ class HomeFragment : Fragment(), Initializer {
 
     override fun references() {
         homeViewModel = ViewModelProviders.of(this, viewModelFactory)[HomeViewModel::class.java]
-
-        homeViewModel.popularMovies()
-        homeViewModel.topRatedMovies()
-        homeViewModel.upcomingMovies()
+        Log.i("references", "${context!!.hasConection}")
+        homeViewModel.popularMovies(context!!.hasConection)
+        homeViewModel.topRatedMovies(context!!.hasConection)
+        homeViewModel.upcomingMovies(context!!.hasConection)
 
         activityInteraction.setTitle(R.string.wellcome)
 
@@ -112,38 +113,26 @@ class HomeFragment : Fragment(), Initializer {
     override fun observables() {
 
         homeViewModel.getPopularMovies().observe(this, Observer { popularMovies ->
-            if (popularMovies != null){
-                when {
-                    popularMovies.results != null -> {
-                        viewAdapterPopular.addPopularMovies(popularMovies.results as MutableList<MovieInfo>)
-                        Log.i("popularMovies", popularMovies.toString())
-                    }
-                    true -> showDialogErrorMessage(getString(R.string.service_fail))
-                }
+            if (popularMovies?.results != null) {
+                viewAdapterPopular.addPopularMovies(popularMovies.results as MutableList<MovieInfo>)
+            } else {
+                showDialogErrorMessage(getString(R.string.service_fail))
             }
         })
 
         homeViewModel.getTopRatedMovies().observe(this, Observer { topMovies ->
-            if (topMovies != null){
-                when {
-                    topMovies.results != null -> {
-                        viewAdapterTop.addTopMovies(topMovies.results as MutableList<MovieInfo>)
-                        Log.i("topMovies", topMovies.toString())
-                    }
-                    true -> showDialogErrorMessage(getString(R.string.service_fail))
-                }
+            if (topMovies?.results != null) {
+                viewAdapterTop.addTopMovies(topMovies.results as MutableList<MovieInfo>)
+            } else {
+                showDialogErrorMessage(getString(R.string.service_fail))
             }
         })
 
         homeViewModel.getUpcomingMovies().observe(this, Observer { upcomingMovies ->
-            if (upcomingMovies != null){
-                when {
-                    upcomingMovies.results != null -> {
-                        viewAdapterUpcoming.addUpcomingMovies(upcomingMovies.results as MutableList<MovieInfo>)
-                        Log.i("upcomingMovies", upcomingMovies.toString())
-                    }
-                    true -> showDialogErrorMessage(getString(R.string.service_fail))
-                }
+            if (upcomingMovies?.results != null) {
+                viewAdapterUpcoming.addUpcomingMovies(upcomingMovies.results as MutableList<MovieInfo>)
+            } else {
+                showDialogErrorMessage(getString(R.string.service_fail))
             }
         })
 
@@ -170,37 +159,37 @@ class HomeFragment : Fragment(), Initializer {
     }
 
     private fun showProgress(show: Boolean) {
-        progressBarPopular.visibility = if (show){
+        progressBarPopular.visibility = if (show) {
             View.VISIBLE
-        }else {
+        } else {
             View.GONE
         }
-        progressBarRated.visibility = if (show){
+        progressBarRated.visibility = if (show) {
             View.VISIBLE
-        }else {
+        } else {
             View.GONE
         }
-        progressBarUpcoming.visibility = if (show){
+        progressBarUpcoming.visibility = if (show) {
             View.VISIBLE
-        }else {
+        } else {
             View.GONE
-        }
-
-        recyclerViewPopular.visibility = if (show){
-            View.GONE
-        }else {
-            View.VISIBLE
         }
 
-        recyclerViewRated.visibility = if (show){
+        recyclerViewPopular.visibility = if (show) {
             View.GONE
-        }else {
+        } else {
             View.VISIBLE
         }
 
-        recyclerViewUpcoming.visibility = if (show){
+        recyclerViewRated.visibility = if (show) {
             View.GONE
-        }else {
+        } else {
+            View.VISIBLE
+        }
+
+        recyclerViewUpcoming.visibility = if (show) {
+            View.GONE
+        } else {
             View.VISIBLE
         }
     }

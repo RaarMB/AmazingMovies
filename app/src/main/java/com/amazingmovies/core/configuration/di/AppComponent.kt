@@ -11,7 +11,7 @@ import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ FeaturesModule::class , NetworkModule::class, AndroidInjectionModule::class, ActivitiesModule::class, FragmentModule::class, ViewModelModule::class, ContextModule::class ])
+@Component(modules = [ FeaturesModule::class , NetworkModule::class, AndroidInjectionModule::class, ActivitiesModule::class, FragmentModule::class, BroadcastReceiverModule::class, ViewModelModule::class, ContextModule::class ])
 interface AppComponent: AndroidInjector<CoreApplication> {
     fun api(): Api
     fun apiGenre(): ApiGenre

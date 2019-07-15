@@ -2,6 +2,7 @@ package com.amazingmovies.core.configuration.di.modules
 
 import com.amazingmovies.core.repository.Api
 import com.amazingmovies.core.repository.ApiGenre
+import com.amazingmovies.home.HomeOfflineRepository
 import com.amazingmovies.home.HomeRepository
 import com.amazingmovies.search.SearchRepository
 import dagger.Module
@@ -23,6 +24,11 @@ class NetworkModule {
     @Singleton
     fun homeRepository(api: Api): HomeRepository =
         HomeRepository(api)
+
+    @Provides
+    @Singleton
+    fun homeOfflineRepository(): HomeOfflineRepository =
+        HomeOfflineRepository()
 
     @Provides
     @Singleton
