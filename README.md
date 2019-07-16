@@ -33,41 +33,76 @@ HomeRepository, HomeOfflineRepository, SearchRepository.
 2. La responsabilidad de cada clase creada.
 
 CoreApplication: Define la inyección de dependecias de la aplicación y la configuración de Realm.
+
 ConnectionReceiver: Obtiene el estado de la conexión a internet.
+
 ViewModelFactory: Especifíca la forma de crear un viewmodel.
+
 ViewModelKey: Permite a dagger crear una instancia de un viewmodel a traves de un key.
+
 ActivitiesModule: Se difinen las actividades de la aplicación.
+
 BroadcastReceiverModule: Se definen los BroadcastReceiver a utilizar.
+
 ContextModule: Se define el contexto de la aplicación.
+
 FeaturesModule: Se definen los MutableLiveData.
+
 FragmentModule: Se definen los fragmentos que componen la aplicación.
+
 NetworkModule: Se definen las apis que se van a consumir y lo repositorios implementados.
+
 ViewModelModule: Se definen los viewmodel empleados en la aplicación.
+
 AppComponent: Se definen los modulos que se emplean, las apis, los livedata.
+
 RealmMigrationConfig: Se utiliza para realizar la migración de un esquema de Realm a otro.
+
 Genre, GenreResponse, GetMoviesResponse, MovieInfo: Modelos de las respuestas de los servicios consumidos.
+
 Api, ApiGenre: Mapeo de los servicios utilizados.
+
 ImageUrl: Genera una imagen de un URL.
+
 ActivityInteraction: Define las acciones que se pueden realizar en la actividad.
+
 BaseActivity: Define la configuración de la actividad y las acciones que se pueden realizar sobre ella.
+
 Initializer: Define funciones a implementar por los fragmentos o actividades.
+
 MainActivity: Actividad principal.
+
 DashboardActivity: Actividad que contiene el menu de navegacion asi como los demas fragmentos.
+
 MovieDetail: Modelo que contiene los datos a mostrar en el fragmento de MovieDetail.
+
 MovieDetailFragment: La vista del detalle de una pelicula.
+
 PopularMovieAdapter: ViewHolder para mostrar el listado de las peliculas mas populares en el recyclerview.
+
 TopMovieAdapter: ViewHolder para mostrar el listado de las peliculas mejor clasificadas en el recyclerview.
+
 UpcomingMovieAdapter: ViewHolder para mostrar el listado de las peliculas proximas en el recyclerview.
+
 HomeFragment: La vista de home que muestra el listado de las categorias y las peliculas que pertenecen a cada una.
+
 HomeOfflineRepository: Consume los datos guardados en realm de las peliculas para poder mostrar las peliculas que pertenecen 
 a cada categoria cuando no hay conexion.
+
 HomeRepository: Consume el api de themoviedb para obtener el listado de las peliculas por categoria.
+
 HomeViewModel: Contiene la logica de presentación de los datos del home.
+
 SearchAdapter: ViewHolder para mostrar el listado de las peliculas por genero.
+
 MovieFind: Modelo que contiene los datos a mostrar en el fragmento de Search.
+
 SearchFragment: La vista para buscar peliculas por genero.
+
 SearchRepository: Consume el api de themoviedb para obtener el listado de las peliculas por genero.
+
 SearchViewModel: Contiene la logica de presentación de los datos de search.
+
 SplashFragment: Contiene la vista del splash de la aplicación.
 
 3. En qué consiste el principio de responsabilidad única? Cuál es su propósito?
