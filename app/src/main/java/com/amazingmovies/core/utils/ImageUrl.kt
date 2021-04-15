@@ -6,8 +6,8 @@ import android.os.AsyncTask
 import android.widget.ImageView
 import android.graphics.BitmapFactory
 
-
-class ImageUrl constructor(@field:SuppressLint("StaticFieldLeak") var imageView: ImageView): AsyncTask<String, Void, Bitmap?>() {
+class ImageUrl constructor(@field:SuppressLint("StaticFieldLeak") var imageView: ImageView) :
+    AsyncTask<String, Void, Bitmap?>() {
 
     override fun doInBackground(vararg params: String?): Bitmap? {
 

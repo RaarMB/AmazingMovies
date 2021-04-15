@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/dashboard_nav"
-            app:startDestination="@id/home">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/dashboard_nav"
+        app:startDestination="@id/home">
 
-    <fragment android:id="@+id/home"
-              android:name="com.amazingmovies.home.HomeFragment"
-              android:label="fragment_home"
-              tools:layout="@layout/fragment_home">
-        <action android:id="@+id/action_home_to_movieDetailFragment"
+    <fragment
+            android:id="@+id/home"
+            android:name="com.amazingmovies.home.HomeFragment"
+            android:label="fragment_home"
+            tools:layout="@layout/fragment_home">
+        <action
+                android:id="@+id/action_home_to_movieDetailFragment"
                 app:destination="@id/movieDetailFragment"
                 app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"/>
+                app:exitAnim="@anim/slide_out_left" />
     </fragment>
-    <fragment android:id="@+id/movieDetailFragment"
-              android:name="com.amazingmovies.detail.MovieDetailFragment"
-              android:label="fragment_movie_detail"
-              tools:layout="@layout/fragment_movie_detail">
-        <argument android:name="movieDetail"
-                  app:argType="com.amazingmovies.core.repository.models.MovieInfo"/>
+    <fragment
+            android:id="@+id/movieDetailFragment"
+            android:name="com.amazingmovies.detail.MovieDetailFragment"
+            android:label="fragment_movie_detail"
+            tools:layout="@layout/fragment_movie_detail">
+        <argument
+                android:name="movieDetail"
+                app:argType="com.amazingmovies.core.repository.models.MovieInfo" />
     </fragment>
-    <fragment android:id="@+id/search"
-              android:name="com.amazingmovies.search.SearchFragment"
-              android:label="SearchFragment">
-        <action android:id="@+id/action_search_to_movieDetailFragment" app:destination="@id/movieDetailFragment"
-                app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"/>
+    <fragment
+            android:id="@+id/search"
+            android:name="com.amazingmovies.search.SearchFragment"
+            android:label="SearchFragment">
+        <action
+                android:id="@+id/action_search_to_movieDetailFragment"
+                app:destination="@id/movieDetailFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left" />
     </fragment>
 </navigation>

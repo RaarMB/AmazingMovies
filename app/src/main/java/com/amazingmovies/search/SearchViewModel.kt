@@ -20,13 +20,16 @@ class SearchViewModel @Inject constructor(
 
     @SuppressLint("CheckResult")
     fun findMovies(searchInput: String) {
-        val apiKey = "a505db8e50ef0d5f45256c1df766b8b2"
-        searchRepository.findMoviesByGenres(apiKey, searchInput, loaderRx)
+        searchRepository.findMoviesByGenres(API_KEY, searchInput, loaderRx)
             .subscribe({
                 getFindMoviesLiveData.postValue(it)
             }, {
                 getFindMoviesLiveData.postValue(null)
             })
+    }
+
+    private companion object {
+        const val API_KEY = "a505db8e50ef0d5f45256c1df766b8b2"
     }
 
 }

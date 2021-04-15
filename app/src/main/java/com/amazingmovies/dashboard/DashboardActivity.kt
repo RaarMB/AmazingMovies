@@ -10,18 +10,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.amazingmovies.R
 import com.amazingmovies.core.broadcasts.ConnectionReceiver
 import com.amazingmovies.core.view.BaseActivity
-import kotlinx.android.synthetic.main.activity_dashboard.*
-
+import kotlinx.android.synthetic.main.activity_dashboard.bottomNavigation
+import kotlinx.android.synthetic.main.activity_dashboard.progressDashboard
 
 class DashboardActivity : BaseActivity() {
-
-    private val action = "android.net.conn.CONNECTIVITY_CHANGE"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         setupBottomNavMenu(findNavController(R.id.nav_host_dashboard))
-        registerReceiver(ConnectionReceiver(), IntentFilter(action))
+        registerReceiver(ConnectionReceiver(), IntentFilter(CONNECTIVITY_CHANGE))
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
@@ -29,11 +27,9 @@ class DashboardActivity : BaseActivity() {
         bottomNav?.setupWithNavController(navController)
     }
 
-    override fun disableBottomNavigation() {
-    }
+    override fun disableBottomNavigation() {}
 
-    override fun enableBottomNavigation() {
-    }
+    override fun enableBottomNavigation() {}
 
     override fun hideBottomNavigation() {
         bottomNavigation.visibility = View.GONE
@@ -51,6 +47,8 @@ class DashboardActivity : BaseActivity() {
         progressDashboard.visibility = View.GONE
     }
 
-
+    private companion object {
+        const val CONNECTIVITY_CHANGE = "android.net.conn.CONNECTIVITY_CHANGE"
+    }
 
 }

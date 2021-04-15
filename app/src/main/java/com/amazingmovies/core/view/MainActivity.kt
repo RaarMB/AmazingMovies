@@ -12,21 +12,15 @@ class MainActivity : BaseActivity() {
         hideStatusBar()
     }
 
-    override fun disableBottomNavigation() {
-    }
+    override fun disableBottomNavigation() {}
 
-    override fun enableBottomNavigation() {
-    }
+    override fun enableBottomNavigation() {}
 
-    override fun hideBottomNavigation() {
-    }
+    override fun hideBottomNavigation() {}
 
-    override fun showBottomNavigation() {
-    }
+    override fun showBottomNavigation() {}
 
-    override fun showSpinner() {
-    }
+    override fun showSpinner() {}
 
-    override fun hideSpinner() {
-    }
+    override fun hideSpinner() {}
 }

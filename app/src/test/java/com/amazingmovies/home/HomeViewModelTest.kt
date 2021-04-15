@@ -24,7 +24,7 @@ class HomeViewModelTest{
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-    val mutableLiveData = MutableLiveData<GetMoviesResponse>()
+    private val mutableLiveData = MutableLiveData<GetMoviesResponse>()
 
     @Before
     fun setup() {

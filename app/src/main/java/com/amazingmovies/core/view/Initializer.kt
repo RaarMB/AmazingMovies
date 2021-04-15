@@ -9,7 +9,7 @@ interface Initializer {
     }
 
     fun references()
-    fun actions()
+    fun actions() {}
     fun observables()
 
 }

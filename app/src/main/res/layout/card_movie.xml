@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:card_movie="http://schemas.android.com/apk/res-auto"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.view.View"/>
@@ -14,9 +12,9 @@
             android:layout_height="220dp"
             android:id="@+id/main_card"
             android:orientation="vertical"
-            android:layout_margin="5dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="4dp">
+            android:layout_margin="@dimen/standardDimen5dp"
+            app:cardCornerRadius="@dimen/standardDimen10dp"
+            app:cardElevation="@dimen/standardDimen5dp">
 
         <LinearLayout
                 android:orientation="vertical"
@@ -29,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="174dp"
                     app:srcCompat="@drawable/ic_upcoming"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/standardDimen8dp"
                     android:contentDescription="@string/app_name"/>
 
             <TextView
@@ -40,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:id="@+id/movie_title"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_marginBottom="@dimen/standardDimen8dp"/>
 
         </LinearLayout>
 

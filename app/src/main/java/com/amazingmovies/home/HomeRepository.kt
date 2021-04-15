@@ -23,5 +23,4 @@ class HomeRepository @Inject constructor(val api: Api) {
         .observeOn(AndroidSchedulers.mainThread())
         .doOnSubscribe { loaderRx.postValue(true) }
         .doOnTerminate { loaderRx.postValue(false) }
-
 }

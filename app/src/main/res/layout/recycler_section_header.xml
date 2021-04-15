@@ -7,5 +7,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/list_item_section_text"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginStart="@dimen/standardDimen8dp"
+        android:layout_marginTop="@dimen/standardDimen16dp"/>

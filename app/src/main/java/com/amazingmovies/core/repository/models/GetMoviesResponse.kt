@@ -2,11 +2,6 @@ package com.amazingmovies.core.repository.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.amazingmovies.core.extensions.readRealmList
-import com.amazingmovies.core.extensions.writeRealmList
-import io.realm.RealmList
-import io.realm.RealmObject
-import io.realm.annotations.RealmClass
 
 open class GetMoviesResponse(
     var page: Int?,

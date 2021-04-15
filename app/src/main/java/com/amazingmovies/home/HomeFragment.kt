@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.amazingmovies.R
-import com.amazingmovies.core.extensions.hasConection
+import com.amazingmovies.core.extensions.hasConnection
 import com.amazingmovies.core.repository.models.MovieInfo
 import com.amazingmovies.core.view.ActivityInteraction
 import com.amazingmovies.core.view.Argument
@@ -23,7 +23,12 @@ import com.amazingmovies.home.adapter.PopularMovieAdapter
 import com.amazingmovies.home.adapter.TopMovieAdapter
 import com.amazingmovies.home.adapter.UpcomingMovieAdapter
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.recyclerViewPopular
+import kotlinx.android.synthetic.main.fragment_home.recyclerViewRated
+import kotlinx.android.synthetic.main.fragment_home.recyclerViewUpcoming
+import kotlinx.android.synthetic.main.fragment_home.progressBarPopular
+import kotlinx.android.synthetic.main.fragment_home.progressBarRated
+import kotlinx.android.synthetic.main.fragment_home.progressBarUpcoming
 import javax.inject.Inject
 
 class HomeFragment : Fragment(), Initializer {
@@ -41,7 +46,6 @@ class HomeFragment : Fragment(), Initializer {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -58,11 +62,12 @@ class HomeFragment : Fragment(), Initializer {
     }
 
     override fun references() {
+        val hasConnection = context?.hasConnection ?: false
         homeViewModel = ViewModelProviders.of(this, viewModelFactory)[HomeViewModel::class.java]
-        Log.i("references", "${context!!.hasConection}")
-        homeViewModel.popularMovies(context!!.hasConection)
-        homeViewModel.topRatedMovies(context!!.hasConection)
-        homeViewModel.upcomingMovies(context!!.hasConection)
+        Log.i("references", "$hasConnection")
+        homeViewModel.popularMovies(hasConnection)
+        homeViewModel.topRatedMovies(hasConnection)
+        homeViewModel.upcomingMovies(hasConnection)
 
         activityInteraction.setTitle(R.string.wellcome)
 
@@ -101,7 +106,8 @@ class HomeFragment : Fragment(), Initializer {
             }
         })
 
-        viewAdapterUpcoming.setOnItemClickListener(object : UpcomingMovieAdapter.OnItemClickListener {
+        viewAdapterUpcoming.setOnItemClickListener(object :
+            UpcomingMovieAdapter.OnItemClickListener {
             override fun onClickUpcomingMovie(view: View, movieInfo: MovieInfo) {
                 Log.i("onClickUpcomingMovie", movieInfo.toString())
                 goToDetail(movieInfo)
@@ -146,7 +152,7 @@ class HomeFragment : Fragment(), Initializer {
 
     @SuppressLint("NewApi")
     private fun showDialogErrorMessage(message: String) {
-        val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder = AlertDialog.Builder(requireActivity())
             .setCancelable(false)
             .setMessage(message)
             .setPositiveButton(R.string.accept) { dialog, _ ->
@@ -198,7 +204,5 @@ class HomeFragment : Fragment(), Initializer {
         val args = Bundle()
         args.putParcelable(Argument.MOVIE_DETAIL, detail)
         findNavController().navigate(R.id.action_home_to_movieDetailFragment, args)
-
     }
-
 }

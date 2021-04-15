@@ -25,16 +25,15 @@ class HomeViewModel @Inject constructor(
 
     @SuppressLint("CheckResult")
     fun popularMovies(networkConnection: Boolean) {
-        if(networkConnection){
-            val popularity = "popularity.desc"
-            homeRepository.getMovies(popularity, loaderRx)
+        if (networkConnection) {
+            homeRepository.getMovies(POPULARITY_DESC, loaderRx)
                 .subscribe({
                     getPopularMoviesLiveData.postValue(it)
                 }, {
                     getPopularMoviesLiveData.postValue(null)
                 })
-        }else{
-            homeOfflineRepository.getMovies("popularity", loaderRx)
+        } else {
+            homeOfflineRepository.getMovies(POPULARITY, loaderRx)
                 .subscribe({
                     getPopularMoviesLiveData.postValue(it)
                 }, {
@@ -47,16 +46,15 @@ class HomeViewModel @Inject constructor(
 
     @SuppressLint("CheckResult")
     fun topRatedMovies(networkConnection: Boolean) {
-        if(networkConnection) {
-            val vote = "vote_average.desc"
-            homeRepository.getMovies(vote, loaderRx)
+        if (networkConnection) {
+            homeRepository.getMovies(VOTE_AVERAGE_DESC, loaderRx)
                 .subscribe({
                     getTopRatedMoviesLiveData.postValue(it)
                 }, {
                     getTopRatedMoviesLiveData.postValue(null)
                 })
-        }else{
-            homeOfflineRepository.getMovies("vote_average", loaderRx)
+        } else {
+            homeOfflineRepository.getMovies(VOTE_AVERAGE, loaderRx)
                 .subscribe({
                     getTopRatedMoviesLiveData.postValue(it)
                 }, {
@@ -67,17 +65,15 @@ class HomeViewModel @Inject constructor(
 
     @SuppressLint("CheckResult")
     fun upcomingMovies(networkConnection: Boolean) {
-        val year = "2020"
-        if(networkConnection) {
-
-            homeRepository.getUpcomingMovies(year, loaderRx)
+        if (networkConnection) {
+            homeRepository.getUpcomingMovies(YEAR, loaderRx)
                 .subscribe({
                     getUpcomingMoviesLiveData.postValue(it)
                 }, {
                     getUpcomingMoviesLiveData.postValue(null)
                 })
-        }else{
-            homeOfflineRepository.getMoviesUpcoming(year, loaderRx)
+        } else {
+            homeOfflineRepository.getMoviesUpcoming(YEAR, loaderRx)
                 .subscribe({
                     getUpcomingMoviesLiveData.postValue(it)
                 }, {
@@ -86,4 +82,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private companion object {
+        const val POPULARITY_DESC = "popularity.desc"
+        const val POPULARITY = "popularity"
+        const val VOTE_AVERAGE_DESC = "vote_average.desc"
+        const val VOTE_AVERAGE = "vote_average"
+        const val YEAR = "2020"
+    }
 }

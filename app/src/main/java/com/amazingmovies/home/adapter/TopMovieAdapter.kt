@@ -1,7 +1,6 @@
 package com.amazingmovies.home.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.amazingmovies.BuildConfig
 import com.amazingmovies.R
-import com.amazingmovies.core.extensions.hasConection
+import com.amazingmovies.core.extensions.hasConnection
 import com.amazingmovies.core.repository.models.MovieInfo
 import com.amazingmovies.core.utils.ImageUrl
 import com.amazingmovies.databinding.CardMovieBinding
@@ -18,23 +17,29 @@ class TopMovieAdapter(var context: Context) :
     RecyclerView.Adapter<TopMovieAdapter.MovieViewHolder>() {
     private lateinit var listener: OnItemClickListener
     private var movieList: MutableList<MovieInfo> = ArrayList()
-    class MovieViewHolder(public val binding: CardMovieBinding) : RecyclerView.ViewHolder(binding.root)
+
+    class MovieViewHolder(val binding: CardMovieBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         setOnItemClickListener(listener)
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val binding: CardMovieBinding = DataBindingUtil.inflate(inflater, R.layout.card_movie, parent, false)
+        val binding: CardMovieBinding =
+            DataBindingUtil.inflate(inflater, R.layout.card_movie, parent, false)
         return MovieViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val imageView = holder.binding.imageMovie
-        if(movieList[position].poster_path.isNullOrEmpty() || movieList[position].poster_path!!.contains("null")){
+        if (movieList[position].poster_path.isNullOrEmpty() || movieList[position].poster_path?.contains(
+                "null"
+            ) == true
+        ) {
             imageView.setImageDrawable(context.getDrawable(R.drawable.ic_upcoming))
-        }else{
-            if(context.hasConection){
+        } else {
+            if (context.hasConnection) {
                 ImageUrl(imageView).execute("${BuildConfig.SERVER_URL_IMAGES}${movieList[position].poster_path}")
-            }else{
+            } else {
                 imageView.setImageDrawable(context.getDrawable(R.drawable.ic_upcoming))
             }
         }
@@ -54,8 +59,7 @@ class TopMovieAdapter(var context: Context) :
         this.listener = listener
     }
 
-
-    fun addTopMovies(addMovieList: MutableList<MovieInfo>){
+    fun addTopMovies(addMovieList: MutableList<MovieInfo>) {
         movieList.clear()
         movieList.addAll(addMovieList)
         notifyDataSetChanged()

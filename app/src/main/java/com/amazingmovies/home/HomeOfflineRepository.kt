@@ -25,7 +25,7 @@ class HomeOfflineRepository {
         .doOnTerminate { loaderRx.postValue(false) }
 
     fun getMoviesUpcoming(year: String, loaderRx: MutableLiveData<Boolean>): Observable<GetMoviesResponse> = MovieInfo()
-        .querySortedAsSingle("release_date", Sort.DESCENDING)
+        .querySortedAsSingle(RELEASE_DATE, Sort.DESCENDING)
         .toObservable()
         .map {
             val response = GetMoviesResponse()
@@ -37,4 +37,7 @@ class HomeOfflineRepository {
         .doOnSubscribe { loaderRx.postValue(true) }
         .doOnTerminate { loaderRx.postValue(false) }
 
+    private companion object {
+        const val RELEASE_DATE = "release_date"
+    }
 }

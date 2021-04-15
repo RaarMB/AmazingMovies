@@ -4,6 +4,7 @@
     <dimen name="standardDimendot5dp">0.5dp</dimen>
     <dimen name="standardDimen1dp">1dp</dimen>
     <dimen name="standardDimen2dp">2dp</dimen>
+    <dimen name="standardDimen5dp">5dp</dimen>
     <dimen name="standardDimen8dp">8dp</dimen>
     <dimen name="standardDimen10dp">10dp</dimen>
     <dimen name="standardDimen15dp">15dp</dimen>
@@ -12,6 +13,7 @@
     <dimen name="standardDimen25dp">25dp</dimen>
     <dimen name="standardDimen23dp">23dp</dimen>
     <dimen name="standardDimen30dp">30dp</dimen>
+    <dimen name="standardDimen32dp">32dp</dimen>
     <dimen name="standardDimen40dp">40dp</dimen>
     <dimen name="standardDimen50dp">50dp</dimen>
     <dimen name="standardDimen56dp">56dp</dimen>

@@ -9,9 +9,9 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class SearchRepository @Inject constructor(val apiGenre: ApiGenre, val api: Api) {
+class SearchRepository @Inject constructor(private val apiGenre: ApiGenre, val api: Api) {
 
-    fun getFindMovies(withGenres: Int, loaderRx: MutableLiveData<Boolean>): Observable<GetMoviesResponse> = api
+    private fun getFindMovies(withGenres: Int, loaderRx: MutableLiveData<Boolean>): Observable<GetMoviesResponse> = api
         .getCategoryMovies(withGenres)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
@@ -23,12 +23,12 @@ class SearchRepository @Inject constructor(val apiGenre: ApiGenre, val api: Api)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .map {
-            return@map it.genres?.find {
-                return@find it.name!!.contains(searchInput, true)
+            return@map it.genres?.find { genre ->
+                return@find genre.name?.contains(searchInput, true) ?: false
             }
         }
         .flatMap {
-            return@flatMap getFindMovies(it.id!!, loaderRx)
+            return@flatMap getFindMovies(it.id ?: 0, loaderRx)
         }
         .doOnSubscribe { loaderRx.postValue(true) }
         .doOnTerminate { loaderRx.postValue(false) }

@@ -3,13 +3,10 @@ package com.amazingmovies.core.repository.models
 import android.os.Parcel
 import android.os.Parcelable
 import com.amazingmovies.core.extensions.createRealmIntList
-import com.amazingmovies.core.extensions.readRealmList
 import com.amazingmovies.core.extensions.writeRealmIntList
-import com.amazingmovies.core.extensions.writeRealmList
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.RealmClass
-import java.util.ArrayList
 
 @RealmClass
 open class MovieInfo(
@@ -44,7 +41,8 @@ open class MovieInfo(
         "",
         ""
     )
-    constructor(test: Boolean): this(
+
+    constructor(test: Boolean) : this(
         515.884f,
         429617,
         false,
@@ -57,7 +55,14 @@ open class MovieInfo(
         RealmList(28),
         "/8RKBHHRqOMOLh5qW3sS6TSFTd8h.jpg",
         false,
-        "Ido, un compasivo médico de cíborgs, encuentra a Alita abandonada en el desguace de Iron City. Cuando Alita despierta, no sabe quién es, ni reconoce el mundo en el que se encuentra, todo es nuevo para ella. Ido intentará proteger a Alita de su misterioso pasado, mientras que su nuevo amigo Hugo le ayudará a despertar sus recuerdos. En ese momento, Alita descubre que posee habilidades de combate extraordinarias, que podría usar para salvar a su nueva familia y amigos. Decidida a encontrar la verdad tras sus orígenes, Alita comienza un viaje que le enfrentará a las injusticias de un mundo oscuro y corrupto, descubriendo que sólo ella puede cambiarlo.",
+        "Ido, un compasivo médico de cíborgs, encuentra a Alita abandonada en el desguace " +
+                "de Iron City. Cuando Alita despierta, no sabe quién es, ni reconoce el mundo en el " +
+                "que se encuentra, todo es nuevo para ella. Ido intentará proteger a Alita de su " +
+                "misterioso pasado, mientras que su nuevo amigo Hugo le ayudará a despertar sus " +
+                "recuerdos. En ese momento, Alita descubre que posee habilidades de combate " +
+                "extraordinarias, que podría usar para salvar a su nueva familia y amigos. Decidida " +
+                "a encontrar la verdad tras sus orígenes, Alita comienza un viaje que le enfrentará " +
+                "a las injusticias de un mundo oscuro y corrupto, descubriendo que sólo ella puede cambiarlo.",
         "/quWP5VIzTUf0Hr8AJZLloM6js8I.jpg"
     )
 
@@ -141,7 +146,11 @@ open class MovieInfo(
     }
 
     override fun toString(): String {
-        return "MovieInfo(popularity=$popularity, id=$id, video=$video, vote_count=$vote_count, vote_average=$vote_average, title=$title, release_date=$release_date, original_language=$original_language, original_title=$original_title, genre_ids=$genre_ids, backdrop_path=$backdrop_path, adult=$adult, overview=$overview, poster_path=$poster_path)"
+        return "MovieInfo(popularity=$popularity, id=$id, video=$video, vote_count=$vote_count, " +
+                "vote_average=$vote_average, title=$title, release_date=$release_date, " +
+                "original_language=$original_language, original_title=$original_title, " +
+                "genre_ids=$genre_ids, backdrop_path=$backdrop_path, adult=$adult, overview=$overview, " +
+                "poster_path=$poster_path)"
     }
 
     companion object {
